@@ -1,8 +1,10 @@
 FROM ubuntu:16.04
 
-WORKDIR /braker2
+WORKDIR /workspace
 
-ADD ./BRAKER_v2.0.5 /braker2
+ARG BRAKER2_PATH="/opt/braker2/"
+ADD ./BRAKER_v2.0.5 $BRAKER2_PATH
+ENV PATH="$BRAKER2_PATH:${PATH}"
 
 RUN apt-get update -qy
 RUN apt-get -qy install perl-modules build-essential
