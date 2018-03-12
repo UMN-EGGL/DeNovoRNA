@@ -1,0 +1,426 @@
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/11F_ATGTCA_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/11F_ATGTCA_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/11F_ATGTCA_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/11F_ATGTCA_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 11F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/39M_CGTACG_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/39M_CGTACG_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/39M_CGTACG_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/39M_CGTACG_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 39M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/11M_GGCTAC_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/11M_GGCTAC_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 11M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/40F_CGTACG_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/40F_CGTACG_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/40F_CGTACG_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/40F_CGTACG_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 40F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/82F_ACTTGA_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/82F_ACTTGA_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/82F_ACTTGA_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/82F_ACTTGA_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 82F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/40M_GTCCGC_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/40M_GTCCGC_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/40M_GTCCGC_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/40M_GTCCGC_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 40M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/41F_ACTTGA_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/41F_ACTTGA_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/41F_ACTTGA_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/41F_ACTTGA_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 41F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/82M_TGACCA_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/82M_TGACCA_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/82M_TGACCA_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/82M_TGACCA_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 82M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/86F_GCCAAT_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/86F_GCCAAT_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/86F_GCCAAT_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/86F_GCCAAT_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 86F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/41M_TGACCA_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/41M_TGACCA_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 41M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/12F_GTCCGC_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/12F_GTCCGC_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/12F_GTCCGC_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/12F_GTCCGC_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 12F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/49F_ACAGTG_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/49F_ACAGTG_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/49F_ACAGTG_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/49F_ACAGTG_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 49F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/86M_CGATGT_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/86M_CGATGT_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/86M_CGATGT_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/86M_CGATGT_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 86M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/12M_AGTCAA_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/12M_AGTCAA_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/12M_AGTCAA_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/12M_AGTCAA_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 12M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/49M_ATCACG_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/49M_ATCACG_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/49M_ATCACG_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/49M_ATCACG_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 49M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/87F_GGCTAC_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/87F_GGCTAC_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/87F_GGCTAC_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/87F_GGCTAC_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 87F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/14F_GATCAG_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/14F_GATCAG_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/14F_GATCAG_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/14F_GATCAG_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 14F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/50F_GCCAAT_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/50F_GCCAAT_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/50F_GCCAAT_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/50F_GCCAAT_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 50F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/87M_CAGATC_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/87M_CAGATC_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 87M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/14M_ACAGTG_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/14M_ACAGTG_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 14M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/50M_CGATGT_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/50M_CGATGT_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 50M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/90F_ACAGTG_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/90F_ACAGTG_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/90F_ACAGTG_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/90F_ACAGTG_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 90F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/17F_CCGTCC_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/17F_CCGTCC_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/17F_CCGTCC_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/17F_CCGTCC_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 17F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/51F_GAGTGG_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/51F_GAGTGG_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/51F_GAGTGG_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/51F_GAGTGG_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 51F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/90M_ATCACG_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/90M_ATCACG_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 90M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/17M_CTTGTA_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/17M_CTTGTA_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/17M_CTTGTA_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/17M_CTTGTA_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 17M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/51M_GTGAAA_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/51M_GTGAAA_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/51M_GTGAAA_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/51M_GTGAAA_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 51M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/1F_TAGCTT_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/1F_TAGCTT_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/1F_TAGCTT_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/1F_TAGCTT_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 1F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/52F_CGATGT_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/52F_CGATGT_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/52F_CGATGT_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/52F_CGATGT_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 52F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/1M_GCCAAT_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/1M_GCCAAT_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 1M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/52M_GAGTGG_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/52M_GAGTGG_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/52M_GAGTGG_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/52M_GAGTGG_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 52M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/20F_CAGATC_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/20F_CAGATC_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/20F_CAGATC_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/20F_CAGATC_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 20F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/61F_TTAGGC_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/61F_TTAGGC_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/61F_TTAGGC_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/61F_TTAGGC_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 61F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/20M_TTAGGC_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/20M_TTAGGC_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 20M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/61M_ACTGAT_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/61M_ACTGAT_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/61M_ACTGAT_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/61M_ACTGAT_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 61M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/35F_CTTGTA_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/35F_CTTGTA_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/35F_CTTGTA_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/35F_CTTGTA_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 35F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/64F_ACTGAT_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/64F_ACTGAT_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/64F_ACTGAT_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/64F_ACTGAT_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 64F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/35M_ACTTGA_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/35M_ACTTGA_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 35M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/64M_GTGGCC_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/64M_GTGGCC_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/64M_GTGGCC_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/64M_GTGGCC_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 64M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/36F_GTGGCC_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/36F_GTGGCC_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/36F_GTGGCC_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/36F_GTGGCC_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 36F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/65F_ATTCCT_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/65F_ATTCCT_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/65F_ATTCCT_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/65F_ATTCCT_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 65F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/36M_ATGTCA_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/36M_ATGTCA_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/36M_ATGTCA_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/36M_ATGTCA_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 36M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/65M_GTTTCG_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/65M_GTTTCG_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/65M_GTTTCG_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/65M_GTTTCG_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 65M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/37F_AGTCAA_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/37F_AGTCAA_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/37F_AGTCAA_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/37F_AGTCAA_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 37F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/66F_AGTTCC_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/66F_AGTTCC_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/66F_AGTTCC_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/66F_AGTTCC_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 66F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/37M_GATCAG_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/37M_GATCAG_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 37M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/66M_TAGCTT_L004_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/66M_TAGCTT_L004_R2_001.fastq: null}
+  metadata: {}
+  name: 66M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/38F_TGACCA_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/38F_TGACCA_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/38F_TGACCA_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/38F_TGACCA_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 38F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/67F_GTGAAA_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/67F_GTGAAA_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/67F_GTGAAA_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/67F_GTGAAA_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 67F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/38M_ATTCCT_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/38M_ATTCCT_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/38M_ATTCCT_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/38M_ATTCCT_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 38M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/67M_AGTTCC_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/67M_AGTTCC_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/67M_AGTTCC_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/67M_AGTTCC_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 67M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/39F_ATCACG_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/39F_ATCACG_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/39F_ATCACG_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/39F_ATCACG_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 39F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/68F_GTTTCG_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/68F_GTTTCG_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/68F_GTTTCG_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/68F_GTTTCG_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 68F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/68M_CCGTCC_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/68M_CCGTCC_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/68M_CCGTCC_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/68M_CCGTCC_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 68M
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/69F_CAGATC_L007_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/69F_CAGATC_L007_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/69F_CAGATC_L008_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/69F_CAGATC_L008_R2_001.fastq: null}
+  metadata: {}
+  name: 69F
+- !!python/object:minus80.Accession.Accession
+  files: !!set {
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/69M_TTAGGC_L005_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/69M_TTAGGC_L005_R2_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/69M_TTAGGC_L006_R1_001.fastq: null,
+    /scratch/sshfs/data_release/hiseq/151006_D00635_0082_BC7HAHANXX/Project_McCue_Project_022/69M_TTAGGC_L006_R2_001.fastq: null}
+  metadata: {}
+  name: 69M

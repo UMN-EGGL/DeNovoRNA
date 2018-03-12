@@ -15,8 +15,10 @@ ENV PATH=/src/STAR/source/:${PATH}
 
 WORKDIR /root
 
-VOLUME ["/scratch/sshfs/data_release/"]
+COPY data data
+COPY scripts scripts
 
-ENTRYPOINT [ "STAR" ]
+#ENTRYPOINT [ "STAR" ]
+ENTRYPOINT [ "/bin/bash" ]
 
 
