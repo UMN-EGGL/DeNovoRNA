@@ -1,4 +1,5 @@
 import os
+import sys
 import minus80 as m80
 import locuspocus as lp
 import asyncio
@@ -52,22 +53,57 @@ class STARMap(object):
     async def create_genome_index(self):
         # Create a genome index
         async with self.sem:
+            exit_future = asyncio.Future(loop=self.loop)
+            print('Indexing Genome for STAR',file=sys.stdout)
             STAR_index_EquCab3_cmd = '''\
                 STAR \
-                --runThreadN 8 \
+                --runThreadN 7 \
                 --runMode genomeGenerate \
                 --genomeDir /project/Data/Fasta/STARIndices/EquCab3 \
                 --genomeFastaFiles /project/Data/Fasta/EquCab3/EquCab3.fasta \
-                --sjdbGTFfile /project/Data/GFFs/ref_EquCab2.0_top_level.gff3 \
+                --sjdbGTFfile /project/Data/GFFs/ref_EquCab3.0_top_level.gff3 \
                 --sjdbGTFtagExonParentTranscript Parent \
             '''
 
-    async def fastq_wc(self,f):
+    async def map_sample(self,f):
         '''
             runs wc on r1 and r2 
         '''
-        # grab a future
+        # bound the number of samples using a semaphore
         async with self.sem:
+            # Check that FASTQ files occur in pairs 
+            if len(sample.files) % 2 != 0:
+                raise ValueError('The number of FASTQ files must be the SAME!!')
+            # Generate the files from each paired end read 
+            R1s = [x for x in sample.files if 'R1' in x]
+            R2s = [x.replace('R1','R2') for x in R1s]
+            # Loop through and could the number of lines in each
+            for r1,r2 in zip(R1s,R2s):
+                # Get the number of lines in R1
+                wc_1_future = asyncio.Future(loop=self.loop)
+                wc_r1 = self.loop.subprocess_exec(
+                    lambda: self.wc_protocol(wc_1_future),
+                    'wc', '-1',
+                )
+                transport, protocol = await wc_r1
+                await wc_r1
+                transport.close()
+                num_r1 = protocol.num_lines
+                # Get the number of lines in R2
+                wc_2_future = asyncio.Future(loop=self.loop)
+                wc_r2 = self.loop.subprocess_exec(
+                    lambda: self.wc_protocol(wc_2_future)        
+                )
+                transport, protocol = await wc_r2
+                await wc_r2
+                transport.close()
+                num_r2 = protocol.num_lines
+                # Compare the number of lines in R1 and R2
+                if num_r1 != num_r2:
+                    return False
+            
+
+
             exit_future = asyncio.Future(loop=self.loop)
             # Creat the subprocess
             print(f'counting lines for {f}')
@@ -117,13 +153,4 @@ class STARMap(object):
                 '''
                 print(cmd)
 
-    async def ensure_equal_lines(self, sample):
-        if len(sample.files) % 2 != 0:
-            raise ValueError('The number of FASTQ files must be the SAME!!')
-        R1s = [x for x in sample.files if 'R1' in x]
-        R2s = [x.replace('R1','R2') for x in R1s]
-        for r1,r2 in zip(R1s,R2s):
-            num_r1 = await self.fastq_wc(r1)
-            num_r2 = await self.fastq_wc(r2)
-            if num_r1 != num_r2:
-                return False
+
