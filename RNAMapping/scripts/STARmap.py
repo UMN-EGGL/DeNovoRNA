@@ -109,8 +109,8 @@ class STARMap(object):
                     raise ValueError(f'{r1} and {r2} must have the same number of lines')
                 bam_name = os.path.basename(r1).replace('_R1','').replace('.fastq','')
                 output_dir = os.path.join(self.out_dir,bam_name+'/')
-                os.makedirs(self.output_dir,exist_ok=True)
-                if not os.path.exists(os.path.join(self.output_dir,'Aligned.sortedByCoord.out.bam')):
+                os.makedirs(self.out_dir,exist_ok=True)
+                if not os.path.exists(os.path.join(self.out_dir,'Aligned.sortedByCoord.out.bam')):
                     print(f'Mapping for {sample.name}')
                 else:
                     print(f'{sample.name} MAPPED!')
