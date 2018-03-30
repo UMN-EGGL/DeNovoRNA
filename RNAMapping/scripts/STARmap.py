@@ -35,8 +35,6 @@ class wc_protocol(asyncio.SubprocessProtocol):
         self.exit_future.set_result(True)
 
 
-
-
 class STARMap(object):
     '''
         Maps RNASeq based on LinkageIO Cohorts
@@ -87,7 +85,7 @@ class STARMap(object):
                 wc_r1 = self.loop.subprocess_exec(
                     lambda: wc_protocol(wc_1_future),
                     'wc', '-l', r1,
-                    stdin=None, stdout=None
+                    stdin=None, stderr=None
                 )
                 transport1, protocol1 = await wc_r1
                 await wc_1_future
@@ -99,7 +97,7 @@ class STARMap(object):
                 wc_r2 = self.loop.subprocess_exec(
                     lambda: wc_protocol(wc_2_future),
                     'wc', '-l', r2,
-                    stdin=None,stdout=None
+                    stdin=None,stderr=None
                 )
                 transport2, protocol2 = await wc_r2
                 await wc_2_future
@@ -110,10 +108,12 @@ class STARMap(object):
                 if num_r1 != num_r2:
                     raise ValueError(f'{r1} and {r2} must have the same number of lines')
                 bam_name = os.path.basename(r1).replace('_R1','').replace('.fastq','')
-                output_dir = os.path.join(out_dir,bam_name+'/')
-                os.makedirs(output_dir,exist_ok=True)
-                if not os.path.exists(os.path.join(output_dir,'Aligned.sortedByCoord.out.bam')):
+                output_dir = os.path.join(self.out_dir,bam_name+'/')
+                os.makedirs(self.output_dir,exist_ok=True)
+                if not os.path.exists(os.path.join(self.output_dir,'Aligned.sortedByCoord.out.bam')):
                     print(f'Mapping for {sample.name}')
+                else:
+                    print(f'{sample.name} MAPPED!')
                 #    cmd = f'''\
                 #        STAR \
                 #        --runThreadN 3 \
