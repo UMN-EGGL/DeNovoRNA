@@ -1,7 +1,6 @@
 import os
 import minus80 as m80
 import locuspocus as lp
-
 import asyncio
 
 #basepath = '/root'
@@ -27,7 +26,7 @@ class STARMap(object):
         self.genome_dir = genome_dir
         self.out_dir = out_dir
         # Define some config stats
-        self.semaphore = asyncio.Semaphore(4)
+        self.sem = asyncio.Semaphore(4)
         self.loop = asyncio.get_event_loop()
         # Allocate this for later
         self.cohort = None
@@ -39,70 +38,67 @@ class STARMap(object):
         def __init__(self,exit_future):
             self.exit_future = exit_future
             self.output = bytearray()
-            self.num_lines = None
+            self.num_lines = 5
 
         def pipe_data_received(self, fd, data):
             self.output.extend(data)
-            print(f'{data} on {fd}')
-            self.num_lines = int(data.decode('ascii').rstrip().split()[0])
+            #print(f'{data} on {fd}')
+            #self.num_lines = int(data.decode('ascii').rstrip().split()[0])
 
         def process_exited(self):
             self.exit_future.set_result(True)
 
 
-    def create_genome_index(self):
+    async def create_genome_index(self):
         # Create a genome index
-        STAR_index_EquCab3_cmd = '''\
-            STAR \
-            --runThreadN 8 \
-            --runMode genomeGenerate \
-            --genomeDir /project/Data/Fasta/STARIndices/EquCab3 \
-            --genomeFastaFiles /project/Data/Fasta/EquCab3/EquCab3.fasta \
-            --sjdbGTFfile /project/Data/GFFs/ref_EquCab2.0_top_level.gff3 \
-            --sjdbGTFtagExonParentTranscript Parent \
-        '''
+        async with self.sem:
+            STAR_index_EquCab3_cmd = '''\
+                STAR \
+                --runThreadN 8 \
+                --runMode genomeGenerate \
+                --genomeDir /project/Data/Fasta/STARIndices/EquCab3 \
+                --genomeFastaFiles /project/Data/Fasta/EquCab3/EquCab3.fasta \
+                --sjdbGTFfile /project/Data/GFFs/ref_EquCab2.0_top_level.gff3 \
+                --sjdbGTFtagExonParentTranscript Parent \
+            '''
 
     async def fastq_wc(self,f):
         '''
             runs wc on r1 and r2 
         '''
         # grab a future
-        exit_future = asyncio.Future(loop=self.loop)
-        # Creat the subprocess
-        create = self.loop.subprocess_exec(
-            lambda: self.wc_protocol(exit_future),
-            'wc', '-l', f,
-            stdin=None,stderr=None
-        )
-        # Create the future 
-        transport, protocol = await create
-        return await exit_future
-        #transport.close()
-        #nl = protocol.num_lines
-        #return nl
+        async with self.sem:
+            exit_future = asyncio.Future(loop=self.loop)
+            # Creat the subprocess
+            print(f'counting lines for {f}')
+            create = self.loop.subprocess_exec(
+                lambda: self.wc_protocol(exit_future),
+                #'wc', '-l', f,
+                'countdown', '5',
+                stdin=None,stderr=None
+            )
+            # Create the future 
+            transport, protocol = await create
+            # let it do its work
+            await exit_future
+            transport.close()
+            nl = protocol.num_lines
+            return nl
 
-    async def ensure_equal_lines(self, sample):
-        if len(sample.files) % 2 != 0:
-            raise ValueError('The number of FASTQ files must be the SAME!!')
-        R1s = [x for x in sample.files if 'R1' in x]
-        R2s = [x.replace('R1','R2') for x in R1s]
-        for r1,r2 in zip(R1s,R2s):
-            num_r1 = await self.fastq_wc(r1)
-            num_r2 = await self.fastq_wc(r2)
-            if num_r1 != num_r2:
-                return False
 
-    async def run(self, cohort):
+
+    def run(self, cohort):
         self.cohort = cohort
-
+        # Define a task for each sample in the cohort
         tasks = []
-        async with self.semaphore:
-            for sample in self.cohort:
-                print(f'Getting line counts for {sample}')
-                task = asyncio.ensure_future(self.ensure_equal_lines(sample))
-                tasks.append(task)
-        responses = asyncio.gather(*tasks)
-        return await responses
+        for sample in self.cohort:
+            # Create a task for each sample
+            task = self.fastq_wc(sample)
+            tasks.append(task)
+        # Gather the tasks
+        results = asyncio.gather(*tasks)
+        # run them in the loop
+        self.loop.run_until_complete(results)
 
     def map(self):
         for r1,r2 in zip(R1s,R2s):
@@ -120,3 +116,14 @@ class STARMap(object):
                     --outSAMtype BAM SortedByCoordinate \
                 '''
                 print(cmd)
+
+    async def ensure_equal_lines(self, sample):
+        if len(sample.files) % 2 != 0:
+            raise ValueError('The number of FASTQ files must be the SAME!!')
+        R1s = [x for x in sample.files if 'R1' in x]
+        R2s = [x.replace('R1','R2') for x in R1s]
+        for r1,r2 in zip(R1s,R2s):
+            num_r1 = await self.fastq_wc(r1)
+            num_r2 = await self.fastq_wc(r2)
+            if num_r1 != num_r2:
+                return False
