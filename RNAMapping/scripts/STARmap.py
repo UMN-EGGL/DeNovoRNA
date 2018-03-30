@@ -17,6 +17,25 @@ import asyncio
 #genome_dir = '/project/Data/Fasta/STARIndices/EquCab3' 
 #out_dir = "/output/"
 
+class wc_protocol(asyncio.SubprocessProtocol):
+    '''
+        IO protocol for the word cound program
+    '''
+    def __init__(self,exit_future):
+        self.exit_future = exit_future
+        self.output = bytearray()
+        self.num_lines = None
+
+    def pipe_data_received(self, fd, data):
+        self.output.extend(data)
+        #print(data)
+        self.num_lines = int(data.decode('ascii').rstrip().split()[0])
+
+    def process_exited(self):
+        self.exit_future.set_result(True)
+
+
+
 
 class STARMap(object):
     '''
@@ -31,23 +50,6 @@ class STARMap(object):
         self.loop = asyncio.get_event_loop()
         # Allocate this for later
         self.cohort = None
-
-    class wc_protocol(asyncio.SubprocessProtocol):
-        '''
-            IO protocol for the word cound program
-        '''
-        def __init__(self,exit_future):
-            self.exit_future = exit_future
-            self.output = bytearray()
-            self.num_lines = 5
-
-        def pipe_data_received(self, fd, data):
-            self.output.extend(data)
-            #print(f'{data} on {fd}')
-            #self.num_lines = int(data.decode('ascii').rstrip().split()[0])
-
-        def process_exited(self):
-            self.exit_future.set_result(True)
 
 
     async def create_genome_index(self):
@@ -65,7 +67,7 @@ class STARMap(object):
                 --sjdbGTFtagExonParentTranscript Parent \
             '''
 
-    async def map_sample(self,f):
+    async def map_sample(self,sample):
         '''
             runs wc on r1 and r2 
         '''
@@ -78,48 +80,55 @@ class STARMap(object):
             R1s = [x for x in sample.files if 'R1' in x]
             R2s = [x.replace('R1','R2') for x in R1s]
             # Loop through and could the number of lines in each
+            print(f'Counting lines for {sample.name}')
             for r1,r2 in zip(R1s,R2s):
                 # Get the number of lines in R1
                 wc_1_future = asyncio.Future(loop=self.loop)
                 wc_r1 = self.loop.subprocess_exec(
-                    lambda: self.wc_protocol(wc_1_future),
-                    'wc', '-1',
+                    lambda: wc_protocol(wc_1_future),
+                    'wc', '-l', r1,
+                    stdin=None, stdout=None
                 )
-                transport, protocol = await wc_r1
-                await wc_r1
-                transport.close()
-                num_r1 = protocol.num_lines
+                transport1, protocol1 = await wc_r1
+                await wc_1_future
+                transport1.close()
+                num_r1 = protocol1.num_lines
+                #print(f'{r1} has {num_r1} lines')
+
                 # Get the number of lines in R2
                 wc_2_future = asyncio.Future(loop=self.loop)
                 wc_r2 = self.loop.subprocess_exec(
-                    lambda: self.wc_protocol(wc_2_future)        
+                    lambda: wc_protocol(wc_2_future),
+                    'wc', '-l', r2,
+                    stdin=None,stdout=None
                 )
-                transport, protocol = await wc_r2
-                await wc_r2
-                transport.close()
-                num_r2 = protocol.num_lines
+                transport2, protocol2 = await wc_r2
+                await wc_2_future
+                transport2.close()
+                num_r2 = protocol2.num_lines
+                #print(f'{r2} has {num_r2} lines')
                 # Compare the number of lines in R1 and R2
                 if num_r1 != num_r2:
                     return False
             
 
 
-            exit_future = asyncio.Future(loop=self.loop)
+            #exit_future = asyncio.Future(loop=self.loop)
             # Creat the subprocess
-            print(f'counting lines for {f}')
-            create = self.loop.subprocess_exec(
-                lambda: self.wc_protocol(exit_future),
-                #'wc', '-l', f,
-                'countdown', '5',
-                stdin=None,stderr=None
-            )
+            #print(f'counting lines for {f}')
+            #create = self.loop.subprocess_exec(
+            #    lambda: self.wc_protocol(exit_future),
+            #    #'wc', '-l', f,
+            #    'countdown', '5',
+            #    stdin=None,stderr=None
+            #)
             # Create the future 
-            transport, protocol = await create
+            #transport, protocol = await create
             # let it do its work
-            await exit_future
-            transport.close()
-            nl = protocol.num_lines
-            return nl
+            #await exit_future
+            #transport.close()
+            #nl = protocol.num_lines
+            #return nl
 
 
 
@@ -129,7 +138,7 @@ class STARMap(object):
         tasks = []
         for sample in self.cohort:
             # Create a task for each sample
-            task = self.fastq_wc(sample)
+            task = self.map_sample(sample)
             tasks.append(task)
         # Gather the tasks
         results = asyncio.gather(*tasks)
