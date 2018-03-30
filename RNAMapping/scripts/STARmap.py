@@ -93,8 +93,7 @@ class STARMap(object):
                 await wc_1_future
                 transport1.close()
                 num_r1 = protocol1.num_lines
-                #print(f'{r1} has {num_r1} lines')
-
+                print(f'{r1} has {num_r1} lines')
                 # Get the number of lines in R2
                 wc_2_future = asyncio.Future(loop=self.loop)
                 wc_r2 = self.loop.subprocess_exec(
@@ -106,31 +105,24 @@ class STARMap(object):
                 await wc_2_future
                 transport2.close()
                 num_r2 = protocol2.num_lines
-                #print(f'{r2} has {num_r2} lines')
+                print(f'{r2} has {num_r2} lines')
                 # Compare the number of lines in R1 and R2
                 if num_r1 != num_r2:
-                    return False
-            
-
-
-            #exit_future = asyncio.Future(loop=self.loop)
-            # Creat the subprocess
-            #print(f'counting lines for {f}')
-            #create = self.loop.subprocess_exec(
-            #    lambda: self.wc_protocol(exit_future),
-            #    #'wc', '-l', f,
-            #    'countdown', '5',
-            #    stdin=None,stderr=None
-            #)
-            # Create the future 
-            #transport, protocol = await create
-            # let it do its work
-            #await exit_future
-            #transport.close()
-            #nl = protocol.num_lines
-            #return nl
-
-
+                    raise ValueError(f'{r1} and {r2} must have the same number of lines')
+                bam_name = os.path.basename(r1).replace('_R1','').replace('.fastq','')
+                output_dir = os.path.join(out_dir,bam_name+'/')
+                os.makedirs(output_dir,exist_ok=True)
+                if not os.path.exists(os.path.join(output_dir,'Aligned.sortedByCoord.out.bam')):
+                    print(f'Mapping for {sample.name}')
+                #    cmd = f'''\
+                #        STAR \
+                #        --runThreadN 3 \
+                #        --genomeDir {genome_dir} \
+                #        --readFilesIn {r1} {r2} \
+                #        --outReadsUnmapped Fastx \
+                #        --outFileNamePrefix  {output_dir} \
+                #        --outSAMtype BAM SortedByCoordinate \
+                #    '''
 
     def run(self, cohort):
         self.cohort = cohort
@@ -144,22 +136,4 @@ class STARMap(object):
         results = asyncio.gather(*tasks)
         # run them in the loop
         self.loop.run_until_complete(results)
-
-    def map(self):
-        for r1,r2 in zip(R1s,R2s):
-            bam_name = os.path.basename(r1).replace('_R1','').replace('.fastq','')
-            output_dir = os.path.join(out_dir,bam_name+'/')
-            os.makedirs(output_dir,exist_ok=True)
-            if not os.path.exists(os.path.join(output_dir,'Aligned.sortedByCoord.out.bam')):
-                cmd = f'''\
-                    STAR \
-                    --runThreadN 3 \
-                    --genomeDir {genome_dir} \
-                    --readFilesIn {r1} {r2} \
-                    --outReadsUnmapped Fastx \
-                    --outFileNamePrefix  {output_dir} \
-                    --outSAMtype BAM SortedByCoordinate \
-                '''
-                print(cmd)
-
 
