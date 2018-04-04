@@ -56,8 +56,10 @@ class HTSEQ_protocol(asyncio.SubprocessProtocol):
 
     def pipe_data_received(self, fd, data):
         self.output.extend(data)
-        gene,count = data.decode('ascii').rstrip.split()
-        self.counts[gene] = count
+        # Decode the data and read in like lines
+        for line in data.decode('ascii').split('\n'):
+            gene,count = line.rstrip().split('\t')
+            self.counts[gene] = count   
 
     def process_exited(self):
         self.exit_future.set_result(True)
@@ -126,7 +128,7 @@ class STARMap(object):
                         raise ValueError(f'{r1} and {r2} must have the same number of lines')
                     # Map the reads using STAR
                     await self.map_paired_end_reads(r1,r2,target_dir)
-                print(f'{sample.name} MAPPED! Skipping this step')
+                print(f'{sample.name} MAPPED!')
                 sample.add_file(os.path.join(target_dir,'Aligned.sortedByCoord.out.bam'))
                 
 
@@ -175,7 +177,7 @@ class STARMap(object):
                 {bam_file}
                 {gff_file}
         '''.split()
-        HTSEQ_future = asyncio.future(loop=self.loop)
+        HTSEQ_future = asyncio.Future(loop=self.loop)
         HTSEQ = self.loop.subprocess_exec(
             lambda: HTSEQ_protocol(HTSEQ_future),
             *cmd,
@@ -193,22 +195,27 @@ class STARMap(object):
         # Bound the number of task we are going to do
         async with self.sem:
             bams = [x for x in sample.files if x.endswith('bam')]
-            for i,bam in bams: 
+            for i,bam in enumerate(bams): 
+                print(f"Mapping {bam}")
                 counts = await self.count_reads(
                     bam,
                     '/project/Data/Fasta/EquCab3/scripts/EquCab3_nice.gff'
                 )
+                import ipdb; ipdb.set_trace() 
+
 
 
     def run(self, cohort):
         self.cohort = cohort
         # STEP 1 - Map all the fastq files for a sample
         # =============================================
+        print('STEP 1')
         tasks = []
         # Only do 4 STAR maps at a time
         self.sem = asyncio.Semaphore(4)
+        samples = list(self.cohort)
         # Define a task for each sample in the cohort
-        for sample in self.cohort:
+        for sample in samples:
             # Create a task for each sample
             task = self.map_sample(sample)
             tasks.append(task)
@@ -219,11 +226,12 @@ class STARMap(object):
 
         # STEP 2 - Count all the reads for a sample
         # =========================================
+        print('STEP 2')
         # Clear tasks
         tasks = []
         # Do 12 HTSeq runs at a time
         self.sem = asyncio.Semaphore(12)
-        for sample in self.cohort:
+        for sample in samples:
             task = self.count_sample(sample)
             tasks.append(task)
         results = asyncio.gather(*tasks)
