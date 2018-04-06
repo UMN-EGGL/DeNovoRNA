@@ -2,15 +2,24 @@ import os
 import sys
 import minus80 as m80
 import locuspocus as lp
+import pandas as pd
 import asyncio
 
-if not m80.Tools.available('Cohort','EMS_Muscle_Fat'):
-    ems = m80.Cohort.from_yaml(
-	    'EMS_Muscle_Fat',
-	    os.path.join('/root/data/MDB.yaml')
-	)
-else:
-    ems = m80.Cohort('EMS_Muscle_Fat')
+
+__all__ = ['STARMap']
+
+#if not m80.Tools.available('Cohort','EMS_Muscle_Fat'):
+#    ems = m80.Cohort.from_yaml(
+#	    'EMS_Muscle_Fat',
+#	    os.path.join('/root/data/MDB.yaml')
+#	)
+#else:
+#    ems = m80.Cohort('EMS_Muscle_Fat')
+
+ems = m80.Cohort.from_accessions(
+        'ems',
+        [m80.Cohort.from_yaml('EMS_Muscle_Fat',os.path.join('/root/data/MDB.yaml')).random_accession()]
+    )
 
 
 class wc_protocol(asyncio.SubprocessProtocol):
@@ -58,8 +67,12 @@ class HTSEQ_protocol(asyncio.SubprocessProtocol):
         self.output.extend(data)
         # Decode the data and read in like lines
         for line in data.decode('ascii').split('\n'):
+            fields = line.rstrip().split('\t')
+            if len(fields) != 2:
+                continue
             gene,count = line.rstrip().split('\t')
-            self.counts[gene] = count   
+            # change count to an int
+            self.counts[gene] = int(count)
 
     def process_exited(self):
         self.exit_future.set_result(True)
@@ -171,9 +184,11 @@ class STARMap(object):
     async def count_reads(self,bam_file,gff_file):
         cmd = f'''
             htseq-count 
-                -i ID 
+                -i transcript_id
                 -f bam 
                 -t exon 
+                --skip-missing
+                --quiet
                 {bam_file}
                 {gff_file}
         '''.split()
@@ -193,15 +208,17 @@ class STARMap(object):
             Count the number of reads per gene for a sample
         '''
         # Bound the number of task we are going to do
+        bam_counts = {}
         async with self.sem:
             bams = [x for x in sample.files if x.endswith('bam')]
             for i,bam in enumerate(bams): 
-                print(f"Mapping {bam}")
+                print(f"Counting {bam}")
                 counts = await self.count_reads(
                     bam,
                     '/project/Data/Fasta/EquCab3/scripts/EquCab3_nice.gff'
                 )
-                import ipdb; ipdb.set_trace() 
+                bam_counts[bam] = counts
+        return pd.DataFrame(bam_counts)
 
 
 
@@ -236,5 +253,7 @@ class STARMap(object):
             tasks.append(task)
         results = asyncio.gather(*tasks)
         self.loop.run_until_complete(results)
+        import ipdb; ipbd.set_trace()
+        return results
 
             
