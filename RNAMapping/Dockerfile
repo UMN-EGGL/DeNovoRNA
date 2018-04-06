@@ -29,7 +29,9 @@ RUN conda install Cython numpy scipy pandas
 RUN pip install --upgrade pip
 RUN pip install git+https://github.com/LinkageIO/Minus80.git
 RUN pip install git+https://github.com/LinkageIO/LocusPocus.git
+RUN pip install git+https://github.com/schae234/htseq.git
 RUN pip install ipython
+RUN pip install ipdb
 
 WORKDIR /root
 
