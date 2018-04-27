@@ -7,6 +7,7 @@ RUN apt-get -y update && apt-get install -y \
     curl wget git gcc build-essential zlib1g-dev \
     vim parallel
 
+
 # Install STAR
 RUN mkdir -p /src/ && \
     cd /src && \
@@ -24,6 +25,7 @@ RUN conda update -n base conda
 RUN conda create -y -n default python=3 
 RUN /bin/bash -c "source activate default"
 
+
 # Install deps
 RUN conda install Cython numpy scipy pandas
 RUN pip install --upgrade pip
@@ -32,6 +34,9 @@ RUN pip install git+https://github.com/LinkageIO/LocusPocus.git
 RUN pip install git+https://github.com/schae234/htseq.git
 RUN pip install ipython
 RUN pip install ipdb
+
+# Install Adapter Removal
+RUN conda install -c maxibor adapterremoval2
 
 WORKDIR /root
 
