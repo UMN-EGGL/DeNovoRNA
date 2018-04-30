@@ -1,5 +1,7 @@
 import os
 import sys
+from glob import glob
+
 import minus80 as m80
 import locuspocus as lp
 import pandas as pd
@@ -8,13 +10,13 @@ import asyncio
 
 __all__ = ['STARMap']
 
-#if not m80.Tools.available('Cohort','EMS_Muscle_Fat'):
-#    ems = m80.Cohort.from_yaml(
-#	    'EMS_Muscle_Fat',
-#	    os.path.join('/root/data/MDB.yaml')
-#	)
-#else:
-#    ems = m80.Cohort('EMS_Muscle_Fat')
+if not m80.Tools.available('Cohort','EMS_Muscle_Fat'):
+    ems = m80.Cohort.from_yaml(
+	    'EMS_Muscle_Fat',
+	    os.path.join('/root/data/MDB.yaml')
+	)
+else:
+    ems = m80.Cohort('EMS_Muscle_Fat')
 
 ems = m80.Cohort.from_accessions(
         'ems',
@@ -78,6 +80,22 @@ class HTSEQ_protocol(asyncio.SubprocessProtocol):
         self.exit_future.set_result(True)
 
 
+class AdapRem_protocol(asyncio.SubprocessProtocol):
+    '''
+        IO Protocol for AdapterRemoval
+    '''
+    def __init__(self,fut):
+        self.exit_future = fut
+        self.output = bytearray()
+
+    def pipe_data_received(self, fd, data):
+        # Nothin major gets written to STDOUT
+        self.output.extend(data)
+
+    def process_exited(self):
+        self.exit_future.set_result(True)
+
+
 class STARMap(object):
     '''
         Maps RNASeq based on LinkageIO Cohorts
@@ -119,28 +137,22 @@ class STARMap(object):
             # Generate the files from each paired end read 
             R1s = [x for x in sample.files if 'R1' in x and 'fastq' in x]
             R2s = [x.replace('R1','R2') for x in R1s]
-            # Loop through and could the number of lines in each
+            # Loop through each pair or FASTQ files
             for r1,r2 in zip(R1s,R2s):
                 # Get the target name
                 bam_name = os.path.basename(r1).replace('_R1','').replace('.fastq','')
                 # Make an output dir based on the BAM name
                 target_dir = os.path.join(self.out_dir,bam_name+'/')
                 os.makedirs(target_dir,exist_ok=True)
-                # Check to see if we already mapped a BAM
+                # STEP 1: Run Adapter Removel
+                if not len(os.path.join(target_dir,'trimmed.pair[12].truncated')):
+                    print(f'Running Adapter Removal for {sample.name}')
+                    await self.remove_adapters(r1,r2,target_dir)
+                # STEP 2: Map BAM
                 if not os.path.exists(os.path.join(target_dir,'Aligned.sortedByCoord.out.bam')):
-                    print(f'Mapping for {sample.name}')
-                    # Get the number of lines in R1
-                    print(f'Counting lines for {sample.name}')
-                    num_r1 = await self.count_lines(r1)
-                    print(f'{r1} has {num_r1} lines')
-                    # Get the number of lines in R2
-                    num_r2 = await self.count_lines(r2)
-                    print(f'{r2} has {num_r2} lines')
-                    # Compare the number of lines in R1 and R2
-                    if num_r1 != num_r2:
-                        raise ValueError(f'{r1} and {r2} must have the same number of lines')
                     # Map the reads using STAR
-                    await self.map_paired_end_reads(r1,r2,target_dir)
+                    print(f'Mapping for {sample.name}')
+                    await self.map_paired_end_reads(target_dir)
                 print(f'{sample.name} MAPPED!')
                 sample.add_file(os.path.join(target_dir,'Aligned.sortedByCoord.out.bam'))
                 
@@ -161,7 +173,9 @@ class STARMap(object):
         transport.close()
         return protocol.num_lines
 
-    async def map_paired_end_reads(self,r1,r2,target_dir):
+    async def map_paired_end_reads(self,target_dir):
+        r1 = os.path.join(target_dir,'trimmed.pair1.truncated')
+        r2 = os.path.join(target_dir,'trimmed.pair2.truncated')
         cmd = f'''
             STAR 
             --runThreadN 3 
@@ -179,6 +193,27 @@ class STARMap(object):
         )
         trans,prot = await STAR
         await STAR_future
+        trans.close()
+
+    async def remove_adapters(self,r1,r2,target_dir):
+        cmd = f'''
+            AdapterRemoval 
+            --file1 {r1}
+            --file2 {r2}
+            --basename {target_dir}
+            --trimns 
+            --trimqualities 
+            --collapse 
+            --combined-output
+        '''.split()
+        AdapRem_future = asyncio.Future(loop=self.loop)
+        AdapRem = self.loop.subprocess_exec(
+            lamdda : AdapRem_protocol(AdapRem_future),
+            *cmd,
+            stdin=None,stderr=None
+        )
+        trans,prot = await AdapRem
+        await AdapRem_future
         trans.close()
 
     async def count_reads(self,bam_file,gff_file):
@@ -253,7 +288,6 @@ class STARMap(object):
             tasks.append(task)
         results = asyncio.gather(*tasks)
         self.loop.run_until_complete(results)
-        import ipdb; ipbd.set_trace()
-        return results
+        return results.result()
 
             
