@@ -7,7 +7,6 @@ RUN apt-get -y update && apt-get install -y \
     curl wget git gcc build-essential zlib1g-dev \
     vim parallel
 
-
 # Install STAR
 RUN mkdir -p /src/ && \
     cd /src && \
@@ -36,7 +35,7 @@ RUN pip install ipython
 RUN pip install ipdb
 
 # Install Adapter Removal
-RUN conda install -c maxibor adapterremoval2
+RUN conda install -c maxibor adapterremoval2==2.2.2
 
 WORKDIR /root
 
