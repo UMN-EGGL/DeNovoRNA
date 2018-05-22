@@ -6,23 +6,33 @@ import minus80 as m80
 import locuspocus as lp
 import pandas as pd
 import asyncio
+import urllib
+import asyncssh
+import subprocess
+
+from minus80.Config import cf
+
+from contextlib import contextmanager
 
 
 __all__ = ['STARMap']
 
-if not m80.Tools.available('Cohort','EMS_Muscle_Fat'):
-    ems = m80.Cohort.from_yaml(
-	    'EMS_Muscle_Fat',
-	    os.path.join('/root/data/MDB.yaml')
-	)
-else:
-    ems = m80.Cohort('EMS_Muscle_Fat')
 
-ems = m80.Cohort.from_accessions(
-        'ems',
-        [m80.Cohort.from_yaml('EMS_Muscle_Fat',os.path.join('/root/data/MDB.yaml')).random_accession()]
+@contextmanager
+def named_pipe(url):
+    tp = os.path.expanduser(
+        os.path.join(
+            cf.options.basedir,
+            'tmp',
+            os.path.basename(url.path))
     )
-
+    #fifo = os.mkfifo(tp) 
+    try:
+        yield tp
+    except Exception as e:
+        raise e
+    finally:
+        os.unlink(tp)
 
 class wc_protocol(asyncio.SubprocessProtocol):
     '''
@@ -157,21 +167,6 @@ class STARMap(object):
                 sample.add_file(os.path.join(target_dir,'Aligned.sortedByCoord.out.bam'))
                 
 
-    async def count_lines(self,filename):
-        '''
-            Create a task (subprocess) that counts the number of lines 
-            in a file.
-        '''
-        wc_future = asyncio.Future(loop=self.loop)
-        wc = self.loop.subprocess_exec(
-            lambda: wc_protocol(wc_future),
-            'wc', '-l', filename,
-            stdin=None, stderr=None
-        )
-        transport, protocol = await wc
-        await wc_future
-        transport.close()
-        return protocol.num_lines
 
     async def map_paired_end_reads(self,target_dir):
         r1 = os.path.join(target_dir,'trimmed.pair1.truncated')
@@ -208,7 +203,7 @@ class STARMap(object):
         '''.split()
         AdapRem_future = asyncio.Future(loop=self.loop)
         AdapRem = self.loop.subprocess_exec(
-            lamdda : AdapRem_protocol(AdapRem_future),
+            lambda : AdapRem_protocol(AdapRem_future),
             *cmd,
             stdin=None,stderr=None
         )
@@ -255,6 +250,41 @@ class STARMap(object):
                 bam_counts[bam] = counts
         return pd.DataFrame(bam_counts)
 
+    async def count_lines(self,pipe):
+        '''
+            Create a task (subprocess) that counts the number of lines 
+            in a file.
+        '''
+        wc_future = asyncio.Future(loop=self.loop)
+        wc = self.loop.subprocess_exec(
+            lambda: wc_protocol(wc_future),
+            'wc', '-l',
+            stdin=pipe, stderr=None
+        )
+        transport, protocol = await wc
+        await wc_future
+        transport.close()
+        print(f'found {protocol.num_lines} for {filename}')
+        return protocol.num_lines
+
+
+    async def pipe_file(self, url):
+        '''
+        Pipes the content of a URL into a fifo
+        '''
+        url = urllib.parse.urlparse(url)
+        connection = asyncssh.connect(
+            url.hostname,
+            username=url.username
+        )
+
+        async with connection as conn: 
+            #os.mkfifo(fifo)
+            # Kick off a remote call the head
+            cmd = f'head -n 100 {url.path}'
+            async with conn.create_process(cmd,stdout=subprocess.PIPE) as process:
+                wc = await self.count_lines(process.stdout)
+                return wc
 
 
     def run(self, cohort):
@@ -289,5 +319,19 @@ class STARMap(object):
         results = asyncio.gather(*tasks)
         self.loop.run_until_complete(results)
         return results.result()
+
+
+
+    def read_remote(self, cohort):
+        self.cohort = cohort
+        accessions = list(self.cohort)
+        tasks = []
+        for acc in accessions:
+            for url in acc.files:
+                tasks.append(self.pipe_file(url))
+        results = asyncio.gather(*tasks)
+        self.loop.run_until_complete(results)
+        return results
+
 
             
