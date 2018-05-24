@@ -279,12 +279,12 @@ class STARMap(object):
         )
 
         async with connection as conn: 
-            #os.mkfifo(fifo)
             # Kick off a remote call the head
             cmd = f'head -n 100 {url.path}'
-            async with conn.create_process(cmd,stdout=subprocess.PIPE) as process:
-                wc = await self.count_lines(process.stdout)
-                return wc
+            read, write = os.pipe()
+            async with  await conn.create_process(cmd) as process:
+                wc = await self.count_lines(process)
+            return wc
 
 
     def run(self, cohort):
