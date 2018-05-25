@@ -9,6 +9,9 @@ import asyncio
 import urllib
 import asyncssh
 import subprocess
+# NOT aiofile <- notice the 's'
+import aiofiles
+
 
 from minus80.Config import cf
 
@@ -277,14 +280,29 @@ class STARMap(object):
             url.hostname,
             username=url.username
         )
+        path = os.path.join(
+            cf.options.basedir,
+            'tmp',
+            os.path.basename(url.path)
+        )
 
         async with connection as conn: 
             # Kick off a remote call the head
             cmd = f'head -n 100 {url.path}'
-            read, write = os.pipe()
-            async with  await conn.create_process(cmd) as process:
-                wc = await self.count_lines(process)
-            return wc
+            # open a pipe
+            try:                                    
+                 os.unlink(path)                     
+            except FileNotFoundError as e:          
+                 pass                                
+            print('making pipe')
+            os.mkfifo(path)                         
+            print('file made')
+            print('opening aiofile')
+            async with conn.create_process(cmd) as process:
+                async with aiofiles.open(path, mode='w') as pipe:
+                    print('waiting on process and pipe')
+                    async for line in process.stdout:
+                        await pipe.write(line)
 
 
     def run(self, cohort):
