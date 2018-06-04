@@ -23,6 +23,31 @@ __all__ = ['STARMap']
 
 @contextmanager
 def named_pipe(url):
+    url = urllib.parse.urlparse(url)
+    # Calculate a new path
+    path = os.path.join(
+        cf.options.basedir,
+        'tmp',
+        os.path.basename(url.path)
+    )
+   # Kick off a remote call the head
+   cmd = f'head -n 100 {url.path}'
+   # open a pipe
+   try:                                    
+        os.unlink(path)                     
+   except FileNotFoundError as e:          
+        pass                                
+   print('making pipe')
+   os.mkfifo(path)                         
+   print('file made')
+   print('opening aiofile')
+   async with conn.create_process(cmd) as process:
+       async with aiofiles.open(path, mode='w') as pipe:
+           print('waiting on process and pipe')
+           async for line in process.stdout:
+               await pipe.write(line)
+
+
     tp = os.path.expanduser(
         os.path.join(
             cf.options.basedir,
@@ -271,6 +296,9 @@ class STARMap(object):
         return protocol.num_lines
 
 
+
+    @
+
     async def pipe_file(self, url):
         '''
         Pipes the content of a URL into a fifo
@@ -303,6 +331,19 @@ class STARMap(object):
                     print('waiting on process and pipe')
                     async for line in process.stdout:
                         await pipe.write(line)
+
+    def read_remote(self, cohort):
+        self.cohort = cohort
+        accessions = list(self.cohort)
+        tasks = []
+        for acc in accessions:
+            for url in acc.files:
+                tasks.append(self.pipe_file(url))
+
+        import ipdb; ipdb.set_trace()
+        results = asyncio.gather(*tasks)
+        self.loop.run_until_complete(results)
+        return results
 
 
     def run(self, cohort):
@@ -340,16 +381,6 @@ class STARMap(object):
 
 
 
-    def read_remote(self, cohort):
-        self.cohort = cohort
-        accessions = list(self.cohort)
-        tasks = []
-        for acc in accessions:
-            for url in acc.files:
-                tasks.append(self.pipe_file(url))
-        results = asyncio.gather(*tasks)
-        self.loop.run_until_complete(results)
-        return results
 
 
             
