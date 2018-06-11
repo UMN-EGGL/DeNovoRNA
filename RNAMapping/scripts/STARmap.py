@@ -24,43 +24,25 @@ __all__ = ['STARMap']
 @contextmanager
 def named_pipe(url):
     url = urllib.parse.urlparse(url)
-    # Calculate a new path
+    # Calculate a local path for the pipe
     path = os.path.join(
         cf.options.basedir,
         'tmp',
         os.path.basename(url.path)
     )
-   # Kick off a remote call the head
-   cmd = f'head -n 100 {url.path}'
-   # open a pipe
-   try:                                    
+    # Try to unlink any old pipes
+    try:                                    
         os.unlink(path)                     
-   except FileNotFoundError as e:          
+    except FileNotFoundError as e:          
         pass                                
-   print('making pipe')
-   os.mkfifo(path)                         
-   print('file made')
-   print('opening aiofile')
-   async with conn.create_process(cmd) as process:
-       async with aiofiles.open(path, mode='w') as pipe:
-           print('waiting on process and pipe')
-           async for line in process.stdout:
-               await pipe.write(line)
-
-
-    tp = os.path.expanduser(
-        os.path.join(
-            cf.options.basedir,
-            'tmp',
-            os.path.basename(url.path))
-    )
-    #fifo = os.mkfifo(tp) 
+    print('making pipe')
+    # open a pipe
+    os.mkfifo(path)                         
+    print(f'file made {path}')
     try:
-        yield tp
+        yield path
     except Exception as e:
         raise e
-    finally:
-        os.unlink(tp)
 
 class wc_protocol(asyncio.SubprocessProtocol):
     '''
@@ -286,20 +268,18 @@ class STARMap(object):
         wc_future = asyncio.Future(loop=self.loop)
         wc = self.loop.subprocess_exec(
             lambda: wc_protocol(wc_future),
-            'wc', '-l',
-            stdin=pipe, stderr=None
+            'wc', '-l', pipe, 
+            stdin=None, stderr=None
         )
         transport, protocol = await wc
         await wc_future
         transport.close()
-        print(f'found {protocol.num_lines} for {filename}')
+        print(f'found {protocol.num_lines} for {pipe}')
         return protocol.num_lines
 
 
 
-    @
-
-    async def pipe_file(self, url):
+    async def pipe_file(self, url, pipe):
         '''
         Pipes the content of a URL into a fifo
         '''
@@ -308,29 +288,16 @@ class STARMap(object):
             url.hostname,
             username=url.username
         )
-        path = os.path.join(
-            cf.options.basedir,
-            'tmp',
-            os.path.basename(url.path)
-        )
-
         async with connection as conn: 
             # Kick off a remote call the head
             cmd = f'head -n 100 {url.path}'
-            # open a pipe
-            try:                                    
-                 os.unlink(path)                     
-            except FileNotFoundError as e:          
-                 pass                                
-            print('making pipe')
-            os.mkfifo(path)                         
-            print('file made')
-            print('opening aiofile')
             async with conn.create_process(cmd) as process:
-                async with aiofiles.open(path, mode='w') as pipe:
+                async with aiofiles.open(pipe, mode='w') as pipe:
                     print('waiting on process and pipe')
                     async for line in process.stdout:
                         await pipe.write(line)
+                    print('done writing')
+        return None
 
     def read_remote(self, cohort):
         self.cohort = cohort
@@ -338,9 +305,11 @@ class STARMap(object):
         tasks = []
         for acc in accessions:
             for url in acc.files:
-                tasks.append(self.pipe_file(url))
-
-        import ipdb; ipdb.set_trace()
+                with named_pipe(url) as pipe:
+                    # Create the producer
+                    tasks.append(self.pipe_file(url,pipe))
+                    # Create the consumer
+                    tasks.append(self.count_lines(pipe))
         results = asyncio.gather(*tasks)
         self.loop.run_until_complete(results)
         return results
